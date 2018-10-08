@@ -45,32 +45,70 @@
 
     var JdCourseContract = web3.eth.contract([
       {
-        "constant": false,
+        "constant": true,
         "inputs": [
           {
-            "name": "_fName",
-            "type": "string"
-          },
-          {
-            "name": "_age",
-            "type": "uint256"
+            "name": "_address",
+            "type": "address"
           }
         ],
-        "name": "setInstructor",
-        "outputs": [],
+        "name": "getInstructor",
+        "outputs": [
+          {
+            "name": "",
+            "type": "uint256"
+          },
+          {
+            "name": "",
+            "type": "bytes16"
+          },
+          {
+            "name": "",
+            "type": "bytes16"
+          }
+        ],
         "payable": false,
-        "stateMutability": "nonpayable",
+        "stateMutability": "view",
         "type": "function"
       },
       {
         "constant": true,
         "inputs": [],
-        "name": "getInstructor",
+        "name": "getInstructors",
         "outputs": [
           {
             "name": "",
-            "type": "string"
-          },
+            "type": "address[]"
+          }
+        ],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "constant": true,
+        "inputs": [
+          {
+            "name": "",
+            "type": "uint256"
+          }
+        ],
+        "name": "instructorAccts",
+        "outputs": [
+          {
+            "name": "",
+            "type": "address"
+          }
+        ],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "constant": true,
+        "inputs": [],
+        "name": "countInstructors",
+        "outputs": [
           {
             "name": "",
             "type": "uint256"
@@ -81,18 +119,43 @@
         "type": "function"
       },
       {
-        "inputs": [],
+        "constant": false,
+        "inputs": [
+          {
+            "name": "_address",
+            "type": "address"
+          },
+          {
+            "name": "_age",
+            "type": "uint256"
+          },
+          {
+            "name": "_fName",
+            "type": "bytes16"
+          },
+          {
+            "name": "_lName",
+            "type": "bytes16"
+          }
+        ],
+        "name": "setInstructor",
+        "outputs": [],
         "payable": false,
         "stateMutability": "nonpayable",
-        "type": "constructor"
+        "type": "function"
       },
       {
         "anonymous": false,
         "inputs": [
           {
             "indexed": false,
-            "name": "name",
-            "type": "string"
+            "name": "fName",
+            "type": "bytes16"
+          },
+          {
+            "indexed": false,
+            "name": "lName",
+            "type": "bytes16"
           },
           {
             "indexed": false,
@@ -100,12 +163,12 @@
             "type": "uint256"
           }
         ],
-        "name": "Instructor",
+        "name": "instructorInfo",
         "type": "event"
       }
     ]);
 
-    var JdCourse = JdCourseContract.at('0x2999e92ca8bb0ad2379591a58173bf5ac2cb0b76');
+    var JdCourse = JdCourseContract.at('0x64edd404dc993c02caf7535c0016add280ead014');
     console.log(JdCourse);
 
     var instructorEvent = JdCourse.Instructor();
